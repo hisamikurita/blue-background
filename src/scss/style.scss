@@ -1,0 +1,204 @@
+/* basic style */
+html,
+body {
+  position: relative;
+  overflow: hidden;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: radial-gradient(ellipse at left top, #72c7fe, #fafdff);
+}
+div {
+  transform-style: preserve-3d;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+$largeWidth: 10;
+$smallWidth: 6;
+
+/* cube style */
+@for $i from 1 through 8 {
+  .cube_wrap:nth-of-type(#{$i}) {
+    position: absolute;
+    top: percentage(random(50) / 100 + 0.15);
+    left: calc(50% + #{$i * 10}px);
+    width: $largeWidth + vw;
+    height: $largeWidth + vw;
+    animation: cube #{$i * 2 + 30}s linear #{$i * 2 + 30 * -1}s infinite;
+    opacity: 0.7;
+    z-index: 99;
+    @keyframes cube {
+      0% {
+        transform: translateX(-150vw);
+      }
+      100% {
+        transform: translateX(150vw);
+      }
+    }
+    & .cube {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: rotation random(20) + 20 + s linear infinite;
+      @keyframes rotation {
+        100% {
+          transform: rotateX(360deg) rotateY(360deg);
+        }
+      }
+    }
+    & .rotation {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: rotate(random(180) + deg);
+    }
+    & .wall {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: solid 3px #fff;
+    }
+    & .front {
+      transform: translateZ($largeWidth / 2 + vw);
+    }
+    & .back {
+      transform: rotateY(180deg) translateZ($largeWidth / 2 + vw);
+    }
+    & .left {
+      transform: rotateY(90deg) translateZ($largeWidth / 2 + vw);
+    }
+    & .right {
+      transform: rotateY(-90deg) translateZ($largeWidth / 2 + vw);
+    }
+    & .top {
+      transform: rotateX(90deg) translateZ($largeWidth / 2 + vw);
+    }
+    & .bottom {
+      transform: rotateX(-90deg) translateZ($largeWidth / 2 + vw);
+    }
+  }
+}
+
+@for $i from 9 through 12 {
+  .cube_wrap:nth-of-type(#{$i}) {
+    position: absolute;
+    top: percentage(random(50) / 100 + 0.25);
+    left: calc(50% + #{$i * 10}px);
+    width: $smallWidth + vw;
+    height: $smallWidth + vw;
+    animation: cube #{$i * 2 + 30}s linear #{$i * 2 + 30 * -1}s infinite;
+    opacity: 0.7;
+    z-index: 99;
+    @keyframes cube {
+      0% {
+        transform: translateX(-150vw);
+      }
+      100% {
+        transform: translateX(150vw);
+      }
+    }
+    & .cube {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: rotation random(20) + 20 + s linear infinite;
+      @keyframes rotation {
+        100% {
+          transform: rotateX(360deg) rotateY(360deg);
+        }
+      }
+    }
+    & .rotation {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: rotate(random(180) + deg);
+    }
+    & .wall {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: solid 3px #fff;
+    }
+    & .front {
+      transform: translateZ($smallWidth / 2 + vw);
+    }
+    & .back {
+      transform: rotateY(180deg) translateZ($smallWidth / 2 + vw);
+    }
+    & .left {
+      transform: rotateY(90deg) translateZ($smallWidth / 2 + vw);
+    }
+    & .right {
+      transform: rotateY(-90deg) translateZ($smallWidth / 2 + vw);
+    }
+    & .top {
+      transform: rotateX(90deg) translateZ($smallWidth / 2 + vw);
+    }
+    & .bottom {
+      transform: rotateX(-90deg) translateZ($smallWidth / 2 + vw);
+    }
+  }
+}
+
+/* square style */
+@for $i from 1 through 150 {
+  .square:nth-of-type(#{$i}) {
+    position: absolute;
+    top: calc(20% + #{random(300)}px);
+    left: percentage(random(100) / 100);
+    opacity: 0.3;
+  }
+}
+
+@for $i from 1 through 100 {
+  .square:nth-of-type(#{$i}) {
+    width: 1 + $i / 30 + vw;
+    height: 1 + $i / 30 + vw;
+    background-color: #b0eaff;
+    box-shadow: 0 0 8px #b0eaff, 0 0 4px #b0eaff, 0 0 4px #b0eaff;
+    animation: square random(10) + 50 + s random(50) * -1 + s infinite;
+    @keyframes square {
+      0% {
+        transform: translateX(-120vw);
+      }
+      100% {
+        transform: translateX(120vw);
+      }
+    }
+  }
+}
+@for $i from 101 through 150 {
+  .square:nth-of-type(#{$i}) {
+    width: 1 + $i / 50 + vw;
+    height: 1 + $i / 50 + vw;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 8px #f9f9f9, 0 0 4px #f9f9f9, 0 0 4px #f9f9f9;
+    animation: square random(10) + 50 + s random(50) * -1 + s infinite;
+    @keyframes square {
+      0% {
+        transform: translateX(-120vw);
+      }
+      100% {
+        transform: translateX(120vw);
+      }
+    }
+  }
+}
+
+/* canvas style */
+#wrap {
+  height: 100%;
+  width: 100%;
+}
+canvas {
+  display: block;
+}
